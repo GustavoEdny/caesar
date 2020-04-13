@@ -6,6 +6,7 @@ defmodule Caesar.MixProject do
       escript: escript_config(),
       app: :caesar,
       version: "0.1.0",
+      source_url: "https://github.com/GustavoEdny/caesar",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps()
