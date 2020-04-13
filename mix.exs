@@ -3,6 +3,7 @@ defmodule Caesar.MixProject do
 
   def project do
     [
+      escript: escript_config(),
       app: :caesar,
       version: "0.1.0",
       elixir: "~> 1.10",
@@ -24,5 +25,9 @@ defmodule Caesar.MixProject do
       {:ex_doc, "~> 0.11"},
       {:earmark, "> 0.2.0"}
     ]
+  end
+
+  defp escript_config do
+    [main_module: Caesar]
   end
 end

@@ -25,3 +25,5 @@ caesar-*.tar
 # Ignore Elixir-LS VSCode extension files
 .elixir_ls
 
+# Ignore the escript file
+caesar
