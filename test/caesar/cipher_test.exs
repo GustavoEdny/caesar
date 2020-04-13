@@ -11,4 +11,12 @@ defmodule Caesar.CipherTest do
   test "encrypt handles capital letters" do
     assert encrypt("abCD", 1) == "zaBC"
   end
+
+  test "encrypt handles spaces" do
+    asset encrypt("ab cd", 1) == "za bc"
+  end
+
+  test "encrypt handles a large shift number" do
+    assert encrypt("abcd", 27) == "zabc"
+  end
 end
