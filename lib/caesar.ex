@@ -11,16 +11,22 @@ defmodule Caesar do
     case parse do
       {[help: true], __________________, _} -> {:help}
       {[shift: shift], ["encrypt", msg], _} -> {:encrypt, msg, shift |> String.to_integer}
+      {[shift: shift], ["decrypt", msg], _} -> {:decrypt, msg, shift |> String.to_integer}
       _____________________________________ -> {:help}
     end
   end
 
-  def process({:encrypt, msg, shift}) do
+  defp process({:encrypt, msg, shift}) do
     Caesar.Cipher.encrypt(msg, shift)
       |> IO.puts
   end
 
-  def process({:help}) do
+  defp process({:decrypt, msg, shift}) do
+    Caesar.Cipher.decrypt(msg, shift)
+      |> IO.puts
+  end
+
+  defp process({:help}) do
     IO.puts """
     usage ./caesar <command> <message> --shift <shift_number>
     """

@@ -11,4 +11,9 @@ defmodule CaesarTest do
     argv = ["encrypt", "abc", "--shift", "1"]
     assert Caesar.parse_args(argv) == {:encrypt, "abc", 1}
   end
+
+  test "parse_args decrypt" do
+    argv = ["decrypt", "bcd", "--shift", "1"]
+    assert Caesar.parse_args(argv) == {:decrypt, "bcd", 1}
+  end
 end
