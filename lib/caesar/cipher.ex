@@ -10,6 +10,16 @@ defmodule Caesar.Cipher do
       |> List.to_string
   end
 
+  def decrypt(message, shift) do
+    # Convert message to char_list
+    message
+      |> to_char_list
+      # Applying shift mapping to the list
+      |> Enum.map(&unshift_char(&1, shift))
+      # return list as a binary string
+      |> List.to_string
+  end
+
   defp shift_char(char, shift) do
     case char do
       chr when chr in (?a..?z) -> calculate_mapping(?a, chr, shift)
