@@ -22,19 +22,42 @@ defmodule Caesar.Cipher do
 
   defp shift_char(char, shift) do
     case char do
-      chr when chr in (?a..?z) -> calculate_mapping(?a, chr, shift)
-      chr when chr in (?A..?Z) -> calculate_mapping(?A, chr, shift)
+      chr when chr in (?a..?z) -> increase_shift(?a, chr, shift)
+      chr when chr in (?A..?Z) -> increase_shift(?A, chr, shift)
       chr -> chr
     end
   end
 
-  defp calculate_mapping(base_letter, char, shift) do
-    # Find the ASCII integer of the char and normalize it
-    # by subtracting the size of the alphabet
-    normalize = &(&1 - @alphabet_size)
-    # ensure the shift number is within the alphabet size
-    shift_num = rem(shift, @alphabet_size)
+  defp unshift_char(char, shift) do
+    case char do
+      chr when chr in (?a..?z) -> decrease_shift(?a, chr, shift)
+      chr when chr in (?A..?Z) -> decrease_shift(?A, chr, shift)
+      chr -> chr
+    end
+  end
+
+  defp decrease_shift(base_letter, char, shift) do
     # calculate the shifted value
-    base_letter + rem(char - normalize.(base_letter) - shift_num, @alphabet_size)
+    shifted_value = char - normalize(base_letter) - shift_num(shift)
+
+    base_letter + rem(shifted_value, @alphabet_size)
+  end
+
+  defp increase_shift(base_letter, char, shift) do
+    # calculate the shifted value
+    shifted_value = (char - normalize(base_letter)) + shift_num(shift)
+
+    base_letter + rem(shifted_value, @alphabet_size)
+  end
+
+  # Find the ASCII integer of the char and normalize it
+  # by subtracting the size of the alphabet
+  defp normalize(char) do
+    char - @alphabet_size
+  end
+
+  # ensure the shift number is within the alphabet size
+  defp shift_num(shift) do
+    rem(shift, @alphabet_size)
   end
 end
